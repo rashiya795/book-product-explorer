@@ -25,7 +25,10 @@ export default function RootLayout({
       >
              <Navbar />
 
-<HomePage/>
+            <HomePage/>
+           
+
+            
           {children}
      
        
