@@ -8,21 +8,26 @@ url:string;
 
 export default async function Navbar() {
 
-  let navigationItem: NavigationItem[] = [];
+ let navigationItem: NavigationItem[] = [];
 
 try {
   const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/navigation`, { cache: "no-store" });
-
-  // Check if response is ok and content-type is JSON
+  
   const contentType = response.headers.get("content-type");
+
   if (response.ok && contentType?.includes("application/json")) {
     navigationItem = await response.json();
   } else {
-    console.error("Unexpected response:", await response.text());
+    const text = await response.text();
+    console.error("Unexpected response:", text);
+    // Optionally show fallback UI:
+    navigationItem = []; 
   }
 } catch (error) {
   console.error("Fetch error:", error);
+  navigationItem = [];
 }
+
 
   
 
@@ -39,13 +44,17 @@ try {
           </div>
           <div className="flex justify-center p-5">
               <ul className="flex  text-amber-950 font-semibold justify-center gap-3  items-center  w-[100%]">
-                  
-{navigationItem.map((item,index)=>(
+      {navigationItem.length > 0 ? (            
+navigationItem.map((item,index)=>(
 <li   key={`${item.url}-${index}`} className="cursor-pointer text-sm hover:bg-[#A2AADB] font-semibold hover:text-[#00224D]  rounded-t-2xl rounded-b-2xl p-3 text-center break-words">
   {item.title}
 </li>
         
-))}
+))
+      ):(
+
+         <li>No navigation items found</li>
+      )}
       
       
               </ul>
