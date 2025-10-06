@@ -10,7 +10,7 @@ export default async function Navbar() {
 
   
 
-   const response = await fetch("http://localhost:4000/navigation",{cache:"no-store"});
+const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/navigation`, { cache: "no-store" });
 
    const navigationItem:NavigationItem[] = await response.json()
   
