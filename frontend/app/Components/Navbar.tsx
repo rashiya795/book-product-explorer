@@ -8,13 +8,22 @@ url:string;
 
 export default async function Navbar() {
 
-  
+  let navigationItem: NavigationItem[] = [];
 
-const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/navigation`, { cache: "no-store" });
+try {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/navigation`, { cache: "no-store" });
 
-   const navigationItem:NavigationItem[] = await response.json()
-  
-   
+  // Check if response is ok and content-type is JSON
+  const contentType = response.headers.get("content-type");
+  if (response.ok && contentType?.includes("application/json")) {
+    navigationItem = await response.json();
+  } else {
+    console.error("Unexpected response:", await response.text());
+  }
+} catch (error) {
+  console.error("Fetch error:", error);
+}
+
   
 
   return (
