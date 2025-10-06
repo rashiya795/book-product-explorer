@@ -19,7 +19,7 @@ export default function Footer() {
             Contact
           </Link>
           <a
-            href="https://github.com/rashiya795/OnlineBooks_Platform#readme"
+            href="https://github.com/rashiya795/book-product-explorer/blob/main/README.md"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-yellow-400"

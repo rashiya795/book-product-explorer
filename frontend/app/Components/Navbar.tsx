@@ -45,7 +45,10 @@ try {
           <div className="flex justify-center p-5">
               <ul className="flex  text-amber-950 font-semibold justify-center gap-3  items-center  w-[100%]">
       {navigationItem.length > 0 ? (            
-navigationItem.map((item,index)=>(
+navigationItem
+      .filter(item => item.title && item.title.trim() !== "")
+
+.map((item,index)=>(
 <li   key={`${item.url}-${index}`} className="cursor-pointer text-sm hover:bg-[#A2AADB] font-semibold hover:text-[#00224D]  rounded-t-2xl rounded-b-2xl p-3 text-center break-words">
   {item.title}
 </li>
