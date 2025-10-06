@@ -4,12 +4,12 @@ import { AppService } from './app.service';
 import{ConfigModule} from '@nestjs/config';
 import {MongooseModule} from '@nestjs/mongoose';
 import { NavigationModule } from './Navigation/Navigation.module';
-
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     MongooseModule.forRoot(process.env.MONGO_URI!),
 NavigationModule,
+
   ],
   controllers: [AppController],
   providers: [AppService],
